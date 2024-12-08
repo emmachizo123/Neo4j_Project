@@ -1,8 +1,8 @@
-
 # import tghe modules for prompts, agents, tools
 
 from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv(), override =True)
+
+load_dotenv(find_dotenv(), override=True)
 from langchain_openai import ChatOpenAI
 from langchain import PromptTemplate
 from langchain import hub
@@ -16,13 +16,11 @@ from langchain_experimental.tools.python.tool import PythonREPLTool
 
 from langchain_openai import ChatOpenAI
 
-
-
 llm = ChatOpenAI(model_name='gpt-4-turbo-preview', temperature=0)
 
 # prepare the prompt template
 
-template ='''
+template = '''
 Answer the following questions as best as you can.
 use only the tools provided
 Questions: {q}
@@ -37,7 +35,7 @@ Questions: {q}
         Note: In the Errorcode nodes, there is no 'name' property.
 
         Always use the schema information to validate and construct queries.
-        
+
         if you can't access the neo4j database just return the query
 '''
 
@@ -45,26 +43,24 @@ prompt_template = PromptTemplate.from_template(template)
 
 prompt = hub.pull('hwchase17/react')  # name of the react prompt
 
+
 # lets see the type
-#print(type(prompt))
+# print(type(prompt))
 
 # lets see the input variables  of the  react prompt
 
-#print(prompt.input_variables)
+# print(prompt.input_variables)
 
 # to see template
 
-#print(prompt.template)
+# print(prompt.template)
 
 # we will use three tools. The agent will chose the best tools based on  user's query
 
 
-
-
-
 # 1. Cypher query crafting tool
 
-def execute_cypher_query(cypher_query:str)->str:
+def execute_cypher_query(cypher_query: str) -> str:
     """ Use this tool to execute Cypher queries on a Neo4j database."""
     print("I am in the execute_cypher_query function")
     return cypher_query
@@ -76,7 +72,6 @@ cypher_query_tool = Tool(
     description='Useful when you need to  excute cyper query'
 
 )
-
 
 # 2 Python REPL tool (for escuting Python code)
 
@@ -112,7 +107,7 @@ duckduckgo_tool = Tool(
 
 # collect all the tools in a list
 
-tools = [cypher_query_tool,python_repl_tool, wikipedia_tool, duckduckgo_tool]
+tools = [cypher_query_tool, python_repl_tool, wikipedia_tool, duckduckgo_tool]
 
 # to create the agent there are two things
 # 1. load the tools that the agent will use
@@ -139,18 +134,15 @@ agent_executor = AgentExecutor(
 
 )
 
-
-
 # Lets prepare a question to ask the agent
 # we will start with a programming question to see if the agent using the REPL tool
 
-#question = 'Generate the first 20 numbers in the fibonacci series'
+# question = 'Generate the first 20 numbers in the fibonacci series'
 
-#question ="who is current PM of UK ?"
+# question ="who is current PM of UK ?"
 
 
-question="Tell me all ErrorCode nodes with the code '2' "
-
+question = "Tell me all ErrorCode nodes with the code '2' "
 
 output = agent_executor.invoke({
     'input': prompt_template.format(q=question)
