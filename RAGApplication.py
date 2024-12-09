@@ -66,19 +66,6 @@ def lookup(question: str, chat_history: List[Dict[str, Any]] = []):
 
     prompt = hub.pull('hwchase17/react')  # name of the react prompt
 
-    # new one
-    # rephrase_prompt = hub.pull("langchain-ai/chat-langchain-rephrase")
-
-    # lets see the type
-    # print(type(prompt))
-
-    # lets see the input variables  of the  react prompt
-
-    # print(prompt.input_variables)
-
-    # to see template
-
-    # print(prompt.template)
 
     # we will use three tools. The agent will chose the best tools based on  user's query
 

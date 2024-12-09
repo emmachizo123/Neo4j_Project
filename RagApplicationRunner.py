@@ -10,15 +10,9 @@ import streamlit as st
 from streamlit_chat import message
 
 
-#Step 1
+
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import MessagesPlaceholder
-
-#Step 2
-memory = ConversationBufferMemory(
-    memory_key="chat_history",
-    return_messages =True
-)
 
 MessagesPlaceholder(variable_name="chat_history")# where memory is stored
 
