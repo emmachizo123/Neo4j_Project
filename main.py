@@ -26,7 +26,7 @@ use only the tools provided
 Questions: {q}
 
  Additional Information:
-
+        Use this additional information for neo4j cypher query only.
         Based on the user's input, construct a single, valid Neo4j Cypher query.
         The schema of the Neo4j database is:
 
@@ -137,15 +137,21 @@ agent_executor = AgentExecutor(
 # Lets prepare a question to ask the agent
 # we will start with a programming question to see if the agent using the REPL tool
 
-# question = 'Generate the first 20 numbers in the fibonacci series'
+#question = 'Generate the first 20 numbers in the fibonacci series'
 
-# question ="who is current PM of UK ?"
+#question ="who is current PM of UK ?"
 
 
-question = "Tell me all ErrorCode nodes with the code '2' "
+#question = "Tell me all ErrorCode nodes with the code '2' "
+
+
+question= input("Please ask my agent a question")
 
 output = agent_executor.invoke({
     'input': prompt_template.format(q=question)
     # q is the placeholder in the prompttemplate . input is one ofthe input variables f the prompt
 
 })
+
+
+
