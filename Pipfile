@@ -19,6 +19,8 @@ python-dotenv = "*"
 langchainhub = "*"
 wikipedia = "*"
 duckduckgo-search = "*"
+streamlit = "*"
+streamlit-chat = "*"
 
 [dev-packages]
 
