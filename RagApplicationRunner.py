@@ -4,7 +4,7 @@ file holds our frontend with Streamlit
 from typing import Set
 
 
-from RagApplicationTemp import lookup
+from RAGApplication import lookup
 
 import streamlit as st
 from streamlit_chat import message
@@ -22,14 +22,18 @@ prompt = st.text_input("Prompt", placeholder = "Ask me your question?..")
 # session persistence
 #persist user prompt history. First iteration set it to an empty list
 
-if(
-    "user_prompt_history" not in st.session_state
-    and "chat_answers_history" not in st.session_state
-    and "chat_history" not in st.session_state
-):
+
+
+
+if "user_prompt_history" not in st.session_state:
     st.session_state["user_prompt_history"] =[]
+
+#persist the chat history
+if "chat_answers_history" not in st.session_state:
     st.session_state["chat_answers_history"] =[]
-    st.session_state["chat_history"] = []
+
+if "chat_history" not in st.session_state:
+    st.session_state["chat_history"] =[]
 
 
 if prompt:

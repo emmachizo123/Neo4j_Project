@@ -31,6 +31,19 @@ def execute_cypher_query(cypher_query: str) -> str:
     return cypher_query
 
 
+""""The algorithm for neo4j"""
+def neo4j_query_algorithim(cypher_query:str):
+    """Executes  a Cypher query on the Neo4j databse """
+    return cypher_query
+
+""""check size of  list"""
+def isMoreThanOne(result:List):
+    """checks the size of the list"""
+    if len(result)>1:
+        return true
+
+"""Create a tool"""
+
 # def lookup(question: str)-> str:
 
 def lookup(question: str, chat_history: List[Dict[str, Any]] = []):
@@ -42,11 +55,11 @@ def lookup(question: str, chat_history: List[Dict[str, Any]] = []):
         Answer the following questions as best as you can.
         use only the tools provided
         Questions: {q}
-        {chat_history}
+        
 
 
          Additional Information:
-
+                Use {chat_history} as memory.
                 Use this additional information for neo4j cypher query only.
                 Based on the user's input, construct a single, valid Neo4j Cypher query.
                 The schema of the Neo4j database is:
@@ -75,6 +88,14 @@ def lookup(question: str, chat_history: List[Dict[str, Any]] = []):
         description='Useful when you need to  excute cyper query'
 
     )
+
+    neo4j_query_algorithim_tool = Tool(
+        name='Cypher Query Algorith',
+        func=neo4j_query_algorithim,
+        description='Useful when you need to  excute cyper query'
+
+    )
+
 
     # 2 Python REPL tool (for executing Python code)
 
